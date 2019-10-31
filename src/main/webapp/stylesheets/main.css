@@ -1,4 +1,7 @@
 body {
 	font-family: Verdana, Helvetica, sans-serif;
-   	background-color: #FFFFCC;
+   	background-image: url('blogBack.jpg');
+   	background-size: cover; 
+   	background-position: center;
+   	background-repeat: no-repeat;
 }

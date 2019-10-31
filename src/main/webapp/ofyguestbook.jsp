@@ -10,8 +10,13 @@
 
 <html>
 	<head>
-		<link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+		<link type="text/css" rel="stylesheet" href="stylesheets/main.css">
+		
 	</head>
+	<h1> Welcome to FoodiesMeet!!!</h1>
+	<h2>A blog page for foodies in Austin. Share your favorite spots to eat, recipes and more! Make sure to subscribe at the bottom for all the latest buzz!</h2>
+	<img src='src/main/webapp/stylesheets/foodBlog.jpg' alt="Header Pic"> 
+	<br>
 	<body>
 		<%
 			String guestbookName = request.getParameter("guestbookName");
