@@ -15,7 +15,7 @@
 	</head>
 	<h1> Welcome to FoodiesMeet!!!</h1>
 	<h2>A blog page for foodies in Austin. Share your favorite spots to eat, recipes and more! Make sure to subscribe at the bottom for all the latest buzz!</h2>
-	<img src='src/main/webapp/stylesheets/foodBlog.jpg' alt="Header Pic"> 
+	<img src='/stylesheets/foodBlog.jpg' alt="Header Pic" align=> 
 	<br>
 	<body>
 		<%
@@ -47,13 +47,14 @@
 		    ObjectifyService.register(Greeting.class);
 		    List<Greeting> greetings = ObjectifyService.ofy().load().type(Greeting.class).list();
 		    Collections.sort(greetings);
+		    Collections.reverse(greetings); 
 		    if (greetings.isEmpty()) {
 		%>
 			<p>Guestbook '${fn:escapeXml(guestbookName)}' has no messages.</p>
 		<%
 		    } else {
 		%>	
-			<p>Messages in Guestbook '${fn:escapeXml(guestbookName)}'.</p>
+			<p>Recent Blogs '${fn:escapeXml(guestbookName)}'.</p>
 		<%
 			for (Greeting greeting : greetings) {
             	pageContext.setAttribute("greeting_content", greeting.getContent());
