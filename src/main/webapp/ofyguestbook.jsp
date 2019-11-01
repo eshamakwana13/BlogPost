@@ -13,7 +13,7 @@
 		<link type="text/css" rel="stylesheet" href="stylesheets/main.css">
 		
 	</head>
-	
+
 	<body>
 		<h1> Welcome to FoodiesMeet!!!</h1>
 		<h2>A blog page for foodies in Austin. Share your favorite spots to eat, recipes and more! Make sure to subscribe at the bottom for all the latest buzz!</h2>
@@ -40,16 +40,19 @@
 		    List<Greeting> greetings = ObjectifyService.ofy().load().type(Greeting.class).list();
 		    Collections.sort(greetings);
 		    Collections.reverse(greetings);
+
 		    if (greetings.isEmpty()) {
 		%>
 			<p>No posts.</p>
 		<%
 		    } else {
 		%>	
+		
 			<p>Recent Food Buzz!!</p>
 			<form action="postblog.jsp">
 				<input type="submit" value="Post Blog">
 			</form>
+
 		<%
 			for (Greeting greeting : greetings) {}
 			for (Greeting greeting : greetings) {
