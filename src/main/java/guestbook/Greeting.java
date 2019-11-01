@@ -15,13 +15,15 @@ public class Greeting implements Comparable<Greeting> {
 	@Parent Key<Guestbook> guestbookName;
     @Id Long id;
     @Index User user;
+    @Index String title;
     @Index String content;
     @Index Date date;
     
     private Greeting() {}
     
-    public Greeting(User user, String content, String guestbookName) {
+    public Greeting(User user, String content, String title, String guestbookName) {
     	this.user = user;
+    	this.title = title;
     	this.content = content;
     	this.guestbookName = Key.create(Guestbook.class, guestbookName);
     	date = new Date();
@@ -29,6 +31,10 @@ public class Greeting implements Comparable<Greeting> {
     
     public User getUser() {
     	return user;
+    }
+    
+    public String getTitle() {
+    	return title;
     }
     
     public String getContent() {

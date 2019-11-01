@@ -28,13 +28,13 @@
 		    UserService userService = UserServiceFactory.getUserService();
 		    User user = userService.getCurrentUser();
 		    if (user != null) {
-			      pageContext.setAttribute("user", user);
+		      pageContext.setAttribute("user", user);
 		%>
 
 		<p>Hello, ${fn:escapeXml(user.nickname)}!</p>
 
 		<%
-	    	}
+		    } 
 		    
 		    ObjectifyService.register(Greeting.class);
 		    List<Greeting> greetings = ObjectifyService.ofy().load().type(Greeting.class).list();
@@ -42,7 +42,7 @@
 		    Collections.reverse(greetings);
 		    if (greetings.isEmpty()) {
 		%>
-			<p>No posts.</p>
+			<p>No Posts</p>
 		<%
 		    } else {
 		%>	
@@ -51,19 +51,18 @@
 				<input type="submit" value="Post Blog">
 			</form>
 		<%
-			for (Greeting greeting : greetings) {}
-			for (Greeting greeting : greetings) {
-            	pageContext.setAttribute("greeting_content", greeting.getContent());
+			for (int i = 0; i < greetings.size() && i < 3; i++) {
+				pageContext.setAttribute("greeting_content", greetings.get(i).getContent());
             	pageContext.setAttribute("greeting_title", "No title");
-            	if (greeting.getTitle() != null) {
-            		pageContext.setAttribute("greeting_title", greeting.getTitle());
+            	if (greetings.get(i).getTitle() != null) {
+            		pageContext.setAttribute("greeting_title", greetings.get(i).getTitle());
             	} 
-				if (greeting.getUser() == null) {
+				if (greetings.get(i).getUser() == null) {
 		%>
 					<p>An anonymous person posted:</p>
 		<%
 				} else {
-					pageContext.setAttribute("greeting_user", greeting.getUser());
+					pageContext.setAttribute("greeting_user", greetings.get(i).getUser());
 					%>
 					<p><b>${fn:escapeXml(greeting_user.nickname)}</b> posted:</p>
 					<%
@@ -73,11 +72,15 @@
 				<blockquote class="title">${fn:escapeXml(greeting_title)}</blockquote>
 				<blockquote>${fn:escapeXml(greeting_content)}</blockquote>
 			</div>
-			
+
 		<%
 			}
 		}
 		%>
+	
+		<form action="ofyguestbook.jsp">
+			<input type="submit" value="Show All">
+		</form>
 
   	</body>
 
