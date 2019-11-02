@@ -28,6 +28,7 @@ body {
    	background-size: cover; 
    	background-position: center;
    	background-repeat: no-repeat;
+<<<<<<< HEAD
 }
 
 .title {
@@ -37,4 +38,6 @@ body {
 .blog-container {
 	border: solid 2px white;
 	background-color: white;
+=======
+>>>>>>> parent of 5b711d2... post and show all working
 }

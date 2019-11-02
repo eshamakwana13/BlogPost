@@ -45,27 +45,27 @@
 			} 
 				    
 				    ObjectifyService.register(BlogPost.class);
-				    List<BlogPost> greetings = ObjectifyService.ofy().load().type(BlogPost.class).list();
-				    Collections.sort(greetings);
-				    Collections.reverse(greetings);
-				    if (greetings.isEmpty()) {
+				    List<BlogPost> blogs = ObjectifyService.ofy().load().type(BlogPost.class).list();
+				    Collections.sort(blogs);
+				    Collections.reverse(blogs);
+				    if (blogs.isEmpty()) {
 		%>
 			<p>No Posts</p>
 		<%
 		    } else {
 		    	
-			for (int i = 0; i < greetings.size() && i < 3; i++) {
-				pageContext.setAttribute("greeting_content", greetings.get(i).getContent());
+			for (int i = 0; i < blogs.size() && i < 3; i++) {
+				pageContext.setAttribute("greeting_content", blogs.get(i).getContent());
             	pageContext.setAttribute("greeting_title", "No title");
-            	if (greetings.get(i).getTitle() != null) {
-            		pageContext.setAttribute("greeting_title", greetings.get(i).getTitle());
+            	if (blogs.get(i).getTitle() != null) {
+            		pageContext.setAttribute("greeting_title", blogs.get(i).getTitle());
             	} 
-				if (greetings.get(i).getUser() == null) {
+				if (blogs.get(i).getUser() == null) {
 		%>
 					<p>An anonymous person posted:</p>
 		<%
 				} else {
-					pageContext.setAttribute("greeting_user", greetings.get(i).getUser());
+					pageContext.setAttribute("greeting_user", blogs.get(i).getUser());
 					%>
 					<p><b>${fn:escapeXml(greeting_user.nickname)}</b> posted:</p>
 					<%

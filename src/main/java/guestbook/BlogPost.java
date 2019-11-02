@@ -15,16 +15,17 @@ public class BlogPost implements Comparable<BlogPost> {
 	@Parent Key<Blog> blogName;
     @Id Long id;
     @Index User user;
-    @Index String title;
     @Index String content;
+    @Index String title;
     @Index Date date;
     
     private BlogPost() {}
     
     public BlogPost(User user, String content, String title, String guestbookName) {
+
     	this.user = user;
-    	this.title = title;
     	this.content = content;
+    	this.title = title;
     	this.blogName = Key.create(Blog.class, guestbookName);
     	date = new Date();
     }
@@ -33,12 +34,12 @@ public class BlogPost implements Comparable<BlogPost> {
     	return user;
     }
     
-    public String getTitle() {
-    	return title;
-    }
-    
     public String getContent() {
     	return content;
+    }
+    
+    public String getTitle() {
+    	return title;
     }
     
 	@Override

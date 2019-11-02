@@ -33,6 +33,7 @@ public class OfySignGuestbookServlet extends HttpServlet {
 	    String title = req.getParameter("title");
 	    System.out.println(title);
 	    BlogPost blogPost = new BlogPost(user, content, title, guestbookName);
+
 	    
 	    ofy().save().entity(blogPost).now();
 	    

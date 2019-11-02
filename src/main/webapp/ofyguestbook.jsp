@@ -13,11 +13,11 @@
 		<link type="text/css" rel="stylesheet" href="stylesheets/main.css">
 		
 	</head>
-
 	<body>
 		<h1> Welcome to FoodiesMeet!!!</h1>
 		<h2>A blog page for foodies in Austin. Share your favorite spots to eat, recipes and more! Make sure to subscribe at the bottom for all the latest buzz!</h2>
-		<img src="stylesheets/foodBlog.jpg" alt="Header Pic"> 
+		<img src='src/main/webapp/stylesheets/foodBlog.jpg' alt="Header Pic"> 
+		<br/>
 		
 		<%
  					String guestbookName = request.getParameter("guestbookName");
@@ -30,20 +30,20 @@
  						    if (user != null) {
  					      pageContext.setAttribute("user", user);
  				%>
-
-		<p>Hello, ${fn:escapeXml(user.nickname)}!</p>
+		<p>Hello, ${fn:escapeXml(user.nickname)}! (You can
+		<a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">sign out</a>.)</p>
 
 		<%
 			}
 				    
 				    ObjectifyService.register(BlogPost.class);
-				    List<BlogPost> greetings = ObjectifyService.ofy().load().type(BlogPost.class).list();
-				    Collections.sort(greetings);
-				    Collections.reverse(greetings);
+				    List<BlogPost> blogs = ObjectifyService.ofy().load().type(BlogPost.class).list();
+				    Collections.sort(blogs);
+				    Collections.reverse(blogs);
 
-				    if (greetings.isEmpty()) {
+				    if (blogs.isEmpty()) {
 		%>
-			<p>No posts.</p>
+			<p>Guestbook '${fn:escapeXml(guestbookName)}' has no messages.</p>
 		<%
 			} else {
 		%>	
@@ -54,33 +54,39 @@
 			</form>
 
 		<%
-			for (BlogPost greeting : greetings) {}
-			for (BlogPost greeting : greetings) {
-		            	pageContext.setAttribute("greeting_content", greeting.getContent());
+			for (BlogPost blog : blogs) {
+		            	pageContext.setAttribute("greeting_content", blog.getContent());
 		            	pageContext.setAttribute("greeting_title", "No title");
-		            	if (greeting.getTitle() != null) {
-		            		pageContext.setAttribute("greeting_title", greeting.getTitle());
+		            	if (blog.getTitle() != null) {
+		            		pageContext.setAttribute("greeting_title", blog.getTitle());
 		            	} 
-				if (greeting.getUser() == null) {
+						if (blog.getUser() == null) {
 		%>
-					<p>An anonymous person posted:</p>
+					<p>An anonymous person wrote:</p>
 		<%
 				} else {
-					pageContext.setAttribute("greeting_user", greeting.getUser());
+					pageContext.setAttribute("greeting_user", blog.getUser());
 					%>
-					<p><b>${fn:escapeXml(greeting_user.nickname)}</b> posted:</p>
+					<p><b>${fn:escapeXml(greeting_user.nickname)}</b> wrote:</p>
 					<%
 				}
-		%>
-			<div class="blog-container">
-				<blockquote class="title">${fn:escapeXml(greeting_title)}</blockquote>
+				%>
 				<blockquote>${fn:escapeXml(greeting_content)}</blockquote>
-			</div>
-			
-		<%
+				<%
 			}
 		}
 		%>
+		
+	
+	 	<form action="/ofysign" method="post">
+	 		<div>
+	 			<textarea name="content" rows="3" cols="60"></textarea>
+	 		</div>
+	 		<div>
+	 			<input type="submit" value="Post Greeting">
+	 		</div>
+	 		<input type="hidden" name="guestbookName" value="${fn:escapeXml(guestbookName)}"/>
+	 	</form>
 
   	</body>
 

@@ -41,6 +41,6 @@
 	</filter-mapping>
   
   	<welcome-file-list>
-    	<welcome-file>homepage.jsp</welcome-file>
+    	<welcome-file>ofyguestbook.jsp</welcome-file>
   	</welcome-file-list>
 </web-app>
