@@ -16,8 +16,15 @@
 	<body>
 		<h1> Welcome to FoodiesMeet!!!</h1>
 		<h2>A blog page for foodies in Austin. Share your favorite spots to eat, recipes and more! Make sure to subscribe at the bottom for all the latest buzz!</h2>
-		<img src='src/main/webapp/stylesheets/foodBlog.jpg' alt="Header Pic"> 
+		<img src='stylesheets/foodBlog.jpg' alt="Header Pic"> 
 		<br/>
+		<p>Recent Food Buzz!!</p>
+		<form action="postblog.jsp">
+			<input type="submit" value="Post Blog">
+		</form>
+		<form action="/subscribe" method="post">
+			<input type="submit" value="Subscribe">
+		</form>
 		
 		<%
  					String guestbookName = request.getParameter("guestbookName");
@@ -46,14 +53,7 @@
 			<p>Guestbook '${fn:escapeXml(guestbookName)}' has no messages.</p>
 		<%
 			} else {
-		%>	
-		
-			<p>Recent Food Buzz!!</p>
-			<form action="postblog.jsp">
-				<input type="submit" value="Post Blog">
-			</form>
 
-		<%
 			for (BlogPost blog : blogs) {
 		            	pageContext.setAttribute("greeting_content", blog.getContent());
 		            	pageContext.setAttribute("greeting_title", "No title");
@@ -71,22 +71,14 @@
 					<%
 				}
 				%>
-				<blockquote>${fn:escapeXml(greeting_content)}</blockquote>
+				<div class="blog-container">
+					<blockquote class="title">${fn:escapeXml(greeting_title)}</blockquote>
+					<blockquote>${fn:escapeXml(greeting_content)}</blockquote>
+				</div>
 				<%
 			}
 		}
 		%>
-		
-	
-	 	<form action="/ofysign" method="post">
-	 		<div>
-	 			<textarea name="content" rows="3" cols="60"></textarea>
-	 		</div>
-	 		<div>
-	 			<input type="submit" value="Post Greeting">
-	 		</div>
-	 		<input type="hidden" name="guestbookName" value="${fn:escapeXml(guestbookName)}"/>
-	 	</form>
 
   	</body>
 
