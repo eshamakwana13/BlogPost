@@ -20,6 +20,7 @@ public class OfySignGuestbookServlet extends HttpServlet {
 	
 	static {
         ObjectifyService.register(BlogPost.class);
+        ObjectifyService.register(Blogger.class);
 	}
 
 	private static final Logger log = Logger.getLogger(OfySignGuestbookServlet.class.getName());

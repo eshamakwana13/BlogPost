@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="guestbook.BlogPost" %>
+<%@ page import="guestbook.Blogger" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Collections"%>
 <%@ page import="com.google.appengine.api.users.User" %>
@@ -23,21 +24,40 @@
 		<form action="postblog.jsp">
 			<input type="submit" value="Post Blog">
 		</form>
-		<form action="/subscribe" method="post">
-			<input type="submit" value="Subscribe">
-		</form>
 		
 		<%
  					String guestbookName = request.getParameter("guestbookName");
  					if (guestbookName == null) {
  						guestbookName = "default";
  					}
+ 			        ObjectifyService.register(Blogger.class);
  					pageContext.setAttribute("guestbookName", guestbookName);
  						    UserService userService = UserServiceFactory.getUserService();
  						    User user = userService.getCurrentUser();
  						    if (user != null) {
- 						      pageContext.setAttribute("user", user);
- 				%>
+ 						    pageContext.setAttribute("user", user);
+ 						   	List<Blogger> subscribers = ObjectifyService.ofy().load().type(Blogger.class).list();
+ 	 					    String email = user.getEmail();
+ 	 					    Boolean subscribed = false;
+ 	 					    for (Blogger blogger : subscribers) {
+ 	 					   		if (email.equals(blogger.getEmail())) subscribed = true;
+ 	 					    }
+ 	 					      
+ 	 					    if (subscribed) {
+ 		%>
+ 		<form action="/unsubscribe" method="post">
+			<input type="submit" value="Unubscribe">
+		</form>
+		<%
+ 	 					      } else {
+ 	 					    	  
+		%>
+ 		<form action="/subscribe" method="post">
+			<input type="submit" value="Subscribe">
+		</form>
+		<%
+ 	 					      }
+		%>
 
 		<p>Hello, ${fn:escapeXml(user.nickname)}!</p>
 
