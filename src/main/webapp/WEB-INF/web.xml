@@ -4,12 +4,12 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 	<servlet>
-  		<servlet-name>guestbook</servlet-name>
-  		<servlet-class>guestbook.GuestbookServlet</servlet-class>
+  		<servlet-name>blog</servlet-name>
+  		<servlet-class>guestbook.BlogServlet</servlet-class>
   	</servlet>
   	<servlet-mapping>
-  		<servlet-name>guestbook</servlet-name>
-  		<url-pattern>/guestbook</url-pattern>
+  		<servlet-name>blog</servlet-name>
+  		<url-pattern>/blog</url-pattern>
   	</servlet-mapping>
   	
 	<servlet>
@@ -20,14 +20,14 @@
   		<servlet-name>ofysign</servlet-name>
   		<url-pattern>/ofysign</url-pattern>
   	</servlet-mapping>
-  
-  	<servlet>
-  		<servlet-name>sign</servlet-name>
-  		<servlet-class>guestbook.SignGuestbookServlet</servlet-class>
-  	</servlet>
-  	<servlet-mapping>
-  		<servlet-name>sign</servlet-name>
-  		<url-pattern>/sign</url-pattern>
+ 	
+ 	<servlet>
+ 		<servlet-name>subscribe</servlet-name>
+ 		<servlet-class>guestbook.SubscriptionServlet</servlet-class>
+ 	</servlet>
+ 	<servlet-mapping>
+ 		<servlet-name>subscribe</servlet-name>
+ 		<url-pattern>/subscribe</url-pattern>
  	</servlet-mapping>
   
   	<filter>

@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="guestbook.Greeting" %>
+<%@ page import="guestbook.BlogPost" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Collections"%>
 <%@ page import="com.google.appengine.api.users.User" %>
@@ -20,32 +20,32 @@
 		<img src="stylesheets/foodBlog.jpg" alt="Header Pic"> 
 		
 		<%
-			String guestbookName = request.getParameter("guestbookName");
-			if (guestbookName == null) {
-				guestbookName = "default";
-			}
-			pageContext.setAttribute("guestbookName", guestbookName);
-		    UserService userService = UserServiceFactory.getUserService();
-		    User user = userService.getCurrentUser();
-		    if (user != null) {
-			      pageContext.setAttribute("user", user);
-		%>
+ 					String guestbookName = request.getParameter("guestbookName");
+ 					if (guestbookName == null) {
+ 						guestbookName = "default";
+ 					}
+ 					pageContext.setAttribute("guestbookName", guestbookName);
+ 						    UserService userService = UserServiceFactory.getUserService();
+ 						    User user = userService.getCurrentUser();
+ 						    if (user != null) {
+ 					      pageContext.setAttribute("user", user);
+ 				%>
 
 		<p>Hello, ${fn:escapeXml(user.nickname)}!</p>
 
 		<%
-	    	}
-		    
-		    ObjectifyService.register(Greeting.class);
-		    List<Greeting> greetings = ObjectifyService.ofy().load().type(Greeting.class).list();
-		    Collections.sort(greetings);
-		    Collections.reverse(greetings);
+			}
+				    
+				    ObjectifyService.register(BlogPost.class);
+				    List<BlogPost> greetings = ObjectifyService.ofy().load().type(BlogPost.class).list();
+				    Collections.sort(greetings);
+				    Collections.reverse(greetings);
 
-		    if (greetings.isEmpty()) {
+				    if (greetings.isEmpty()) {
 		%>
 			<p>No posts.</p>
 		<%
-		    } else {
+			} else {
 		%>	
 		
 			<p>Recent Food Buzz!!</p>
@@ -54,13 +54,13 @@
 			</form>
 
 		<%
-			for (Greeting greeting : greetings) {}
-			for (Greeting greeting : greetings) {
-            	pageContext.setAttribute("greeting_content", greeting.getContent());
-            	pageContext.setAttribute("greeting_title", "No title");
-            	if (greeting.getTitle() != null) {
-            		pageContext.setAttribute("greeting_title", greeting.getTitle());
-            	} 
+			for (BlogPost greeting : greetings) {}
+			for (BlogPost greeting : greetings) {
+		            	pageContext.setAttribute("greeting_content", greeting.getContent());
+		            	pageContext.setAttribute("greeting_title", "No title");
+		            	if (greeting.getTitle() != null) {
+		            		pageContext.setAttribute("greeting_title", greeting.getTitle());
+		            	} 
 				if (greeting.getUser() == null) {
 		%>
 					<p>An anonymous person posted:</p>

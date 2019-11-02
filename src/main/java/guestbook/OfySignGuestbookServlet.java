@@ -2,6 +2,7 @@
 package guestbook;
 
 import java.io.IOException;
+
 import java.util.Date;
 import java.util.logging.Logger;
 
@@ -18,7 +19,7 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
 public class OfySignGuestbookServlet extends HttpServlet {
 	
 	static {
-        ObjectifyService.register(Greeting.class);
+        ObjectifyService.register(BlogPost.class);
 	}
 
 	private static final Logger log = Logger.getLogger(OfySignGuestbookServlet.class.getName());
@@ -31,9 +32,9 @@ public class OfySignGuestbookServlet extends HttpServlet {
 	    String content = req.getParameter("content");
 	    String title = req.getParameter("title");
 	    System.out.println(title);
-	    Greeting greeting = new Greeting(user, content, title, guestbookName);
+	    BlogPost blogPost = new BlogPost(user, content, title, guestbookName);
 	    
-	    ofy().save().entity(greeting).now();
+	    ofy().save().entity(blogPost).now();
 	    
 	    resp.sendRedirect("/ofyguestbook.jsp");
 	}

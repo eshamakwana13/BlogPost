@@ -10,22 +10,22 @@ import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Parent;
 
 @Entity
-public class Greeting implements Comparable<Greeting> {
+public class BlogPost implements Comparable<BlogPost> {
 
-	@Parent Key<Guestbook> guestbookName;
+	@Parent Key<Blog> blogName;
     @Id Long id;
     @Index User user;
     @Index String title;
     @Index String content;
     @Index Date date;
     
-    private Greeting() {}
+    private BlogPost() {}
     
-    public Greeting(User user, String content, String title, String guestbookName) {
+    public BlogPost(User user, String content, String title, String guestbookName) {
     	this.user = user;
     	this.title = title;
     	this.content = content;
-    	this.guestbookName = Key.create(Guestbook.class, guestbookName);
+    	this.blogName = Key.create(Blog.class, guestbookName);
     	date = new Date();
     }
     
@@ -42,7 +42,7 @@ public class Greeting implements Comparable<Greeting> {
     }
     
 	@Override
-	public int compareTo(Greeting other) {
+	public int compareTo(BlogPost other) {
 		if (date.after(other.date)) {
             return 1;
         } else if (date.before(other.date)) {

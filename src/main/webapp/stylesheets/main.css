@@ -35,5 +35,6 @@ body {
 }
 
 .blog-container {
-	border: solid 2px black;
+	border: solid 2px white;
+	background-color: white;
 }

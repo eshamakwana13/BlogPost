@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="guestbook.Greeting" %>
+<%@ page import="guestbook.BlogPost" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Collections"%>
 <%@ page import="com.google.appengine.api.users.User" %>
